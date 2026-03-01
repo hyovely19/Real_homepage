@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세종시 부동산 데이터 대시보드</title>
+    <!-- 구글 폰트 적용 (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 헤더 영역 -->
+        <header class="dashboard-header">
+            <h1>세종시 부동산 데이터 대시보드</h1>
+            <p class="subtitle">Real Estate Data Dashboard for Sejong City</p>
+        </header>
+
+        <!-- 메인 콘텐츠 영역 (3단 레이아웃) -->
+        <main class="dashboard-content">
+            
+            <!-- 상단 요약 카드 섹션 -->
+            <section class="top-section">
+                <!-- 매매 카드 -->
+                <div class="index-card">
+                    <div class="card-header">
+                        <h2>매매 (Trading)</h2>
+                        <span class="trend-icon up">▲</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="main-value">102.94</div>
+                        <div class="micro-chart" id="trading-micro-chart"></div>
+                    </div>
+                </div>
+
+                <!-- 전세 카드 -->
+                <div class="index-card">
+                    <div class="card-header">
+                        <h2>전세 (Jeonse)</h2>
+                        <span class="trend-icon up steep">▲</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="main-value highlight-blue">106.55</div>
+                        <div class="micro-chart" id="jeonse-micro-chart"></div>
+                    </div>
+                </div>
+
+                <!-- 월세 카드 -->
+                <div class="index-card">
+                    <div class="card-header">
+                        <h2>월세 (Monthly Rent)</h2>
+                        <span class="trend-icon up">▲</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="main-value">103.39</div>
+                        <div class="micro-chart" id="rent-micro-chart"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 중앙 차트 섹션 -->
+            <section class="middle-section">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2>매매/전세/월세 9개월 연속 추이</h2>
+                    </div>
+                    <div class="main-chart-wrapper">
+                        <!-- Chart.js 캔버스 -->
+                        <canvas id="mainTrendsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 하단 인포그래픽 박스 (토지 / 심리) -->
+            <section class="bottom-section">
+                 <div class="info-card">
+                    <div class="card-header">
+                        <h2>토지 거래 지표</h2>
+                    </div>
+                    <div class="card-body split-layout">
+                        <div class="left-stat">
+                            <span class="label">토지 가격 상승률</span>
+                            <div class="value positive">+0.154%</div>
+                            <div class="bar-chart-placeholder">
+                                <div class="bar rising"></div>
+                            </div>
+                        </div>
+                        <div class="right-stat">
+                            <span class="label">소비 심리 (하강 국면)</span>
+                            <div class="value sentiment-down">84.3</div>
+                            <div class="gradient-scale"></div>
+                        </div>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="icon">📄</span> 토지 거래 건수: <strong>543건</strong>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 우측 사이드바 -->
+        <aside class="right-sidebar">
+            <!-- 전세가율 도넛 차트 -->
+            <div class="sidebar-card">
+                <h2>매매 대비 전세가율</h2>
+                <div class="donut-chart-container">
+                    <canvas id="ratioDonutChart"></canvas>
+                    <div class="donut-center-text">
+                        <span class="percent">49.9%</span>
+                    </div>
+                </div>
+                <div class="comparison-note">
+                    <span class="line-marker"></span> 68.3% (전국 평균)
+                </div>
+            </div>
+
+            <!-- 가격 회복률 게이지 -->
+            <div class="sidebar-card">
+                <h2>전고점 대비 가격 회복률</h2>
+                <div class="gauge-container">
+                    <div class="gauge-bar">
+                        <div class="gauge-fill" style="width: 72.8%;"></div> <!-- 100 - 27.2 -->
+                    </div>
+                    <div class="gauge-labels">
+                        <span>전고점</span>
+                        <span class="current-loss">-27.20%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 심리 온도계 -->
+            <div class="sidebar-card thermometer-card">
+                 <h2>시장 심리 (온도계)</h2>
+                 <div class="thermometer-container">
+                     <div class="thermometer-stem">
+                         <div class="thermometer-fluid" style="height: 40%;"></div>
+                     </div>
+                     <div class="thermometer-bulb"></div>
+                 </div>
+                 <div class="thermometer-status">다소 냉각됨</div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Chart.js 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

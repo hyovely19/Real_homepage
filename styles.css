@@ -1,0 +1,426 @@
+/* 기본 설정 (Minimalist, Apple-style aesthetics) */
+:root {
+    --bg-color: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text-primary: #1A1D20;
+    --text-secondary: #6C757D;
+
+    /* 주요 색상 */
+    --cobalt-blue: #0047AB;
+    /* 전세 강조 */
+    --light-blue: #4A90E2;
+    /* 매매 */
+    --soft-red: #E74C3C;
+    /* 상승 포인트 */
+    --grey-light: #E9ECEF;
+    --grey-medium: #ADB5BD;
+    /* 월세 */
+
+    /* 폰트 */
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* 그림자 및 모서리 둥글기 (고급스러운 느낌) */
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.07);
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 전체 컨테이너 및 3단 레이아웃 */
+.dashboard-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    /* 메인 콘텐츠 + 우측 사이드바 */
+    grid-gap: 32px;
+}
+
+/* 헤더 영역 */
+.dashboard-header {
+    grid-column: 1 / -1;
+    /* 전체 너비 차지 */
+    margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.dashboard-header .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+}
+
+/* 메인 콘텐츠 영역 */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* 카드 공통 스타일 */
+.index-card,
+.chart-container,
+.info-card,
+.sidebar-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.index-card:hover,
+.chart-container:hover,
+.info-card:hover,
+.sidebar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* 상단 3개 요약 카드 (Grid) */
+.top-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.card-header h2,
+.chart-header h2,
+.sidebar-card h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.trend-icon {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.trend-icon.up {
+    color: var(--soft-red);
+}
+
+.trend-icon.up.steep {
+    color: var(--soft-red);
+    font-size: 1.2rem;
+}
+
+.main-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.highlight-blue {
+    color: var(--cobalt-blue);
+}
+
+.micro-chart {
+    height: 40px;
+    width: 100%;
+    margin-top: 16px;
+    border-radius: 4px;
+    /* script.js에서 차트를 그리거나, CSS 그라데이션으로 간이 표현 */
+    background: linear-gradient(to right, transparent, rgba(0, 71, 171, 0.1));
+}
+
+/* 메인 차트 섹션 */
+.main-chart-wrapper {
+    position: relative;
+    height: 350px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* 인포그래픽 박스 (토지 / 심리) */
+.split-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--grey-light);
+}
+
+.split-layout>div {
+    flex: 1;
+}
+
+.left-stat .label,
+.right-stat .label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.left-stat .value {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--soft-red);
+}
+
+.right-stat .value.sentiment-down {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--cobalt-blue);
+}
+
+.bar-chart-placeholder {
+    height: 8px;
+    background: var(--grey-light);
+    border-radius: 4px;
+    margin-top: 12px;
+}
+
+.bar.rising {
+    width: 70%;
+    height: 100%;
+    background: var(--soft-red);
+    border-radius: 4px;
+}
+
+.gradient-scale {
+    height: 8px;
+    background: linear-gradient(to right, var(--cobalt-blue), var(--grey-light));
+    border-radius: 4px;
+    margin-top: 12px;
+}
+
+.footer-stat {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 우측 사이드바 */
+.right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sidebar-card h2 {
+    margin-bottom: 24px;
+}
+
+/* 도넛 차트 컨테이너 */
+.donut-chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.donut-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.donut-center-text .percent {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.comparison-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.line-marker {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--grey-medium);
+}
+
+/* 선형 게이지 차트 */
+.gauge-container {
+    margin-top: 16px;
+}
+
+.gauge-bar {
+    height: 12px;
+    background-color: var(--grey-light);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    height: 100%;
+    background-color: var(--cobalt-blue);
+    border-radius: 6px;
+}
+
+.gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.current-loss {
+    color: var(--cobalt-blue);
+    font-weight: 600;
+}
+
+/* 심리 온도계 CSS 모델형 */
+.thermometer-card {
+    text-align: center;
+}
+
+.thermometer-container {
+    position: relative;
+    width: 40px;
+    height: 150px;
+    margin: 0 auto 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.thermometer-stem {
+    width: 14px;
+    height: 120px;
+    background-color: var(--grey-light);
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 2px solid white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.thermometer-bulb {
+    width: 30px;
+    height: 30px;
+    background-color: var(--cobalt-blue);
+    border-radius: 50%;
+    margin-top: -10px;
+    z-index: 2;
+    border: 2px solid white;
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.thermometer-fluid {
+    width: 100%;
+    background-color: var(--cobalt-blue);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: height 1s ease-in-out;
+}
+
+.thermometer-status {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cobalt-blue);
+}
+
+/* 반응형 모바일 대응 */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+    .top-section {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 16px;
+        grid-gap: 16px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .dashboard-header .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .top-section {
+        grid-template-columns: 1fr;
+        /* 스마트폰 세로 모드에서는 1열로 표시 */
+    }
+
+    .index-card,
+    .chart-container,
+    .info-card,
+    .sidebar-card {
+        padding: 20px;
+    }
+
+    .main-value {
+        font-size: 1.8rem;
+    }
+
+    .main-chart-wrapper {
+        height: 250px;
+        /* 모바일에서 차트 높이 축소 */
+    }
+
+    .split-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .split-layout>div {
+        width: 100%;
+    }
+
+    .donut-chart-container {
+        height: 180px;
+    }
+}
